@@ -1,0 +1,16 @@
+{{#each posts as |post|}}
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body">
+                <p class="card-text">{{this.title}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a href="/details/{{this._id}}" class="btn btn-sm btn-outline-secondary">View</a>
+                    </div>
+                    <small class="text-muted">{{this.likes}} likes</small>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}
+
