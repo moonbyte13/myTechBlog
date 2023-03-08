@@ -1,5 +1,9 @@
-header, .project:not(:last-child) {
-  border-bottom: 1px solid #ccc;
+* {
+  font-family: 'Roboto Mono', monospace;
+}
+
+h1 {
+  font-family: 'Major Mono Display';
 }
 
 .no-button {
@@ -21,4 +25,8 @@ header, .project:not(:last-child) {
   color: #056605;
   font-weight: bold;
   margin-left: -5px;
+}
+
+.card {
+  box-shadow: #555bff 0px 0px 0px 3px, #1fc11b 0px 0px 0px 6px, #ffd913 0px 0px 0px 9px, #ff9c55 0px 0px 0px 12px, #ff5555 0px 0px 0px 15px;
 }

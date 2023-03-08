@@ -1,16 +1,19 @@
-{{#each posts as |post|}}
-    <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
-            <div class="card-body">
-                <p class="card-text">{{this.title}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <a href="/details/{{this._id}}" class="btn btn-sm btn-outline-secondary">View</a>
+<div class='grid grid-col justify-items-center'>
+    {{#each posts as |post|}}
+        <div class="flex border border-gray-900 text-zinc-700 bg-green-300 rounded-xl p-2 m-6 w-80 card" id='card{{this.id}}'>
+            <div class="w-full">
+                <div class="">
+                    <p class="">{{this.title}}</p>
+                    <div class="flex justify-between align-items-center">
+                        <div class="">
+                            <a href="/details/" class="">View</a>
+                        </div>
+                        {{this.likes}} likes
                     </div>
-                    <small class="text-muted">{{this.likes}} likes</small>
                 </div>
             </div>
         </div>
-    </div>
-{{/each}}
+    {{/each}}
+</div>
+
 

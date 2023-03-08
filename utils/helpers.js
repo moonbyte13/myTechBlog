@@ -1,14 +1,17 @@
 module.exports = {
-  format_date: date => {
-    return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
+  formatDate: date => {
+    return `${ new Date(date).getMonth() + 1 }/${ new Date(date).getDate() }/${ new Date(
       date
-    ).getFullYear()}`;
+    ).getFullYear() }`;
   },
-  format_plural: (word, amount) => {
+  formatPlural: (word, amount) => {
     if (amount !== 1) {
-      return `${word}s`;
+      return `${ word }s`;
     }
 
     return word;
+  },
+  ranNum: () => {
+    return Math.floor(Math.random() * 100) + 101;
   }
 };
