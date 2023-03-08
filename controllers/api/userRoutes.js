@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
       // include the Comment model here:
       {
         model: Comment,
-        attributes: ['id', 'comment_text', 'created_at'],
+        attributes: ['id', 'commentText', 'created_at'],
         include: {
           model: Post,
           attributes: ['title']
@@ -55,11 +55,12 @@ router.post('/', (req, res) => {
   // expects {username: 'lernantino', password: 'password1234'}
   User.create({
     username: req.body.username,
+    email: req.body.email,
     password: req.body.password
   })
     .then(dbUserData => {
       req.session.save(() => {
-        req.session.user_id = dbUserData.id;
+        req.session.userId = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
 
@@ -69,15 +70,15 @@ router.post('/', (req, res) => {
 });
 
 // POST /api/users/login
-router.post('/login', (req, res) => {
-  // expects {username: 'lernantino', password: 'password1234'}
-  User.findOne({
+router.post('/login', async (req, res) => {
+  // expects {email: 'lernantino@gmail.com', password: 'password1234'}
+  await User.findOne({
     where: {
-      username: req.body.username
+      email: req.body.email
     }
   }).then(dbUserData => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'No user with that username!' });
+      res.status(400).json({ message: 'No user with that email!' });
       return;
     }
 
@@ -91,7 +92,7 @@ router.post('/login', (req, res) => {
 
     req.session.save(() => {
       // declare session variables
-      req.session.user_id = dbUserData.id;
+      req.session.userId = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
 

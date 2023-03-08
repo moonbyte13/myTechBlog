@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Wired",
+    "postContent": "Wired is one of the most popular tech blogs in the industry. It features articles on all aspects of technology and how it shapes our lives, touching on politics, transport, security, and culture. The tone is light and snarky, making it engaging as well as informative.",
+    "userId": 6
+  },
+  {
+    "title": "MIT Technology Review",
+    "postContent": "If you’re looking for a tech blog, MIT Technology Review should be one of the first you click through to. MIT Technology Review features topics like AI, biotechnology, computing, climate change and so much more.",
+    "userId": 6
+  },
+  {
+    "title": "TechCrunch",
+    "postContent": "TechCrunch has the latest news on gadgets and gizmos, apps, and tech events. TechCrunch even has sections for those looking specifically for video and audio when searching for new tech news.",
+    "userId": 6
+  },
+  {
+    "title": "Gizmodo",
+    "postContent": "Gizmodo is the go-to blog for tech, science and culture. Gizmodo focuses on sharing tech content with occasional humor — and always with blunt honesty. With a history dating back to 2002, Gizmodo is a long-established and well-respected news source.",
+    "userId": 6
+  },
+  {
+    "title": "ReadWrite",
+    "postContent": "ReadWrite was founded by New Zealander Richard MacManus in 2003. ReadWrite is a place to find the newest information about connected cars, smart homes, AR/VR, fintech and APIs.",
+    "userId": 6
+  },
+  {
+    "title": "Fast Company",
+    "postContent": "Fast Company focuses on innovations in technology, leadership and world-changing design, emphasizing their impact on business. Launched in November 1995, Fast Company is still a leading site for business leaders, and a subscription to the newsletter provides a daily dose of all the important news.",
+    "userId": 6
+  },
+  {
+    "title": "Mashable",
+    "postContent": "Mashable is a massive multiplatform media and entertainment company offering in-depth news and opinion pieces on tech and digital culture. Mashable also has an intensive section focused completely on tech. The site attracts 45 million unique monthly users and 28 million social media followers.",
+    "userId": 6
+  }
+]

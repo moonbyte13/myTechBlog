@@ -16,9 +16,9 @@
     "no-irregular-whitespace": "error",
     "no-unreachable": "error",
     "curly": "error",
-    "eqeqeq": "error",
+    "eqeqeq": ["error", "smart"],
     "no-empty-function": "error",
-    "no-multi-spaces": "error",
+    "no-multi-spaces": ["error", { "ignoreEOLComments": false }],
     "no-mixed-spaces-and-tabs": "error",
     "no-trailing-spaces": "error",
     "default-case": "error",
@@ -28,6 +28,12 @@
     "brace-style": "error",
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
-    "radix": "off"
+    "radix": "off",
+    "camelcase": ["error", { "ignoreDestructuring": true, "properties": "always" }],
+    "yoda": ["error", "never", { "exceptRange": true }],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
+    "template-curly-spacing": ["error", "always"],
+    "arrow-spacing": "error",
+    "vars-on-top": "error"
   }
 }

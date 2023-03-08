@@ -6,7 +6,16 @@ const path = require('path');
 const helpers = require('./utils/helpers');
 
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({ helpers });
+
+// initialize handlebars with helpers functions
+const hbs = exphbs.create({
+  extname: 'hbs',
+  defaultLayout: 'main',
+  layoutsDir: __dirname + '/views/layouts/',
+  viewsDir: __dirname + '/views/',
+  partialsDir: __dirname + '/views/partials/',
+  helpers
+});
 
 const session = require('express-session');
 
@@ -18,8 +27,8 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-        // Session will automatically expire in 10 minutes
-        expires: 10 * 60 * 1000
+    // Session will automatically expire in 10 minutes
+    expires: 10 * 60 * 1000
   },
   resave: true,
   rolling: true,
@@ -30,17 +39,16 @@ const sess = {
 };
 
 app.use(session(sess));
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
 app.use(routes);
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log(`App listening on port ${ PORT }!`));
 });
