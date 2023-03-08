@@ -8,8 +8,8 @@ router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
 // router.use('/dashboard', dashboardRoutes);
 
-router.use((req, res) => {
-  res.status(404).end();
+router.use('*', (req, res) => {
+  res.status(404).render('error', { title: '404 Error', layout: 'errorLayout' });
 });
 
 module.exports = router;

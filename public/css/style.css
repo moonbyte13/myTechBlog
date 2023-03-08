@@ -28,5 +28,11 @@ h1 {
 }
 
 .card {
-  box-shadow: #555bff 0px 0px 0px 3px, #1fc11b 0px 0px 0px 6px, #ffd913 0px 0px 0px 9px, #ff9c55 0px 0px 0px 12px, #ff5555 0px 0px 0px 15px;
+  box-shadow: #555bff 0px 0px 0px 4px, #1fc11b 0px 0px 0px 6px, #ffd913 0px 0px 0px 9px, #ff9c55 0px 0px 0px 12px, #ff5555 0px 0px 0px 15px;
+}
+
+.cardContainer {
+  border-radius: 3em;
+  background-color: #9400d3;
+  box-shadow: 0 0 0 2px #9400d3, 15px 15px 2px -4px #ffffff00, 15px 15px 4px 0 #4b0082, 30px 30px 2px -4px #ffffff00, 30px 30px 4px 0 #0000ff, 45px 45px 2px -4px #ffffff00, 45px 45px 4px 0 #00ff00, 60px 60px 4px -2px #ffffff00, 60px 60px 4px 0 #ffff00, 75px 75px 4px -2px #ffffff00, 75px 75px 4px 0 #ff7f00, 90px 90px 4px -2px #ffffff00, 90px 90px 4px 0 #ff0000;
 }
