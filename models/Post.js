@@ -34,12 +34,16 @@ Post.init(
       validate: {
         isUrl: true
       }
+    },
+    likeCount: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
     }
   },
   {
     sequelize,
     freezeTableName: true,
-    underscored: true,
     modelName: 'post'
   }
 );

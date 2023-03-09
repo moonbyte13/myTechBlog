@@ -104,4 +104,28 @@ router.delete('/post/:id', async (req, res) => {
   }
 });
 
+// PUT /api/post/likeCount
+router.post('/post/:id/likeCount', async (req, res) => {
+  try {
+    const likeData = await Post.update(
+      {
+        likeCount: req.body.likeCount,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    if (!likeData) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
+
+    res.status(200).json(likeData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
