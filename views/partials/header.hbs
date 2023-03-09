@@ -2,6 +2,7 @@
     <a href="/">
         <h1 class='text-5xl' style="font-family: 'Major Mono Display';">A Tech Blog</h1>
     </a>
+    {{!-- FIXME: Not refreshing on logout --}}
     <nav class='flex items-center'>
         {{#if loggedIn}}
         <label class='m-1'>{{ uData.dataValues.username }}</label> 

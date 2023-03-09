@@ -9,14 +9,16 @@ router.get('/', async (req, res) => {
       include: [{ model: User, attributes: ['username'] }]
     });
 
-    const uData = await User.findAll({
-      where: { id: req.session.userId },
-      attributes: { exclude: ['password'] }
-    });
-
-    const posts = await postData.map((post) => post.get({ plain: true }));
-
-    res.render('homepage', { posts, uData, loggedIn: req.session.loggedIn });
+    const posts = postData.map((post) => post.get({ plain: true }));
+    if(req.session.loggedIn) {
+      const uData = await User.findOne({
+        where: { id: req.session.userId },
+        attributes: { exclude: ['password'] }
+      });
+      res.render('homepage', { posts, uData, loggedIn: req.session.loggedIn });
+    } else {
+      res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
