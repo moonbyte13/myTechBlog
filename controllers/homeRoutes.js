@@ -49,14 +49,23 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
-// GET postin
-router.get('postin', (req, res) => {
-  if (!req.session.loggedIn) {
-    res.render('postin');
-    return;
-  }
+// GET details with single post
+router.get('/details/:id', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [{ model: User, attributes: ['username'] }]
+    });
 
-  res.redirect('/dashboard');
+    const post = postData.get({ plain: true });
+
+    if(req.session.loggedIn) {
+      res.render('postDetails', { post, loggedIn: req.session.loggedIn });
+    } else {
+      res.render('postDetails', { post, loggedIn: req.session.loggedIn });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // GET sign up

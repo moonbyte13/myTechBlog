@@ -1,6 +1,6 @@
 <div class='w-5/6 -translate-x-12 px-10 mt-14 mb-36 ml-2 cardContainer'>
     {{#each posts as |post|}}
-        <a href="/details/" class="">
+        <a href="/details/{{this.id}}" class="">
             <div class="flex border border-gray-900 text-zinc-700 bg-green-300 rounded-xl p-2 my-10 w-80 h-32 card w-full" id='card{{this.id}}'>
                 <div class="w-full">
                     <div class="h-full grid grid-rows-2 grid-cols-2">

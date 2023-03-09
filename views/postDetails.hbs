@@ -1,0 +1,19 @@
+<div class='w-5/6 -translate-x-12 px-10 mt-14 mb-36 ml-2 cardContainer'>
+  <div class="flex border border-gray-900 text-zinc-700 bg-green-300 rounded-xl p-2 my-10 w-80 card w-full" id='card{{post.id}}'>
+      <div class="w-full py-3 px-5">
+          <div class="h-full grid grid-rows-3 grid-cols-7">
+              <p class="font-bold text-xl h-fit col-span-6" style="font-family: 'Major Mono Display';">{{post.title}}</p>
+              <div class="h-fit col-start-7">{{post.likes}} likes</div>
+              <div class='row-start-2 row-span-2 col-span-7 h-fit w-fit'>
+                <p class=''>
+                  {{post.postContent}}
+                  <div class='pt-5 pb-1 grid w-full justify-center'>
+                    <a class='text-sm underline w-fit' href="{{post.url}}" target='_blank'>{{post.url}}</a>
+                  </div>
+                </p>
+              </div>
+              
+          </div>
+      </div>
+  </div>
+</div>
