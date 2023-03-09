@@ -1,39 +1,41 @@
-<div class="row justify-space-between-md">
-  <div class="login-card">
-    <h2 class="page-title">Login</h2>
-    <form class="form login-form">
-      <div class="form-group">
-        <label for="email-login">Email:</label>
-        <input class="form-input" type="text" id="emailLogin" />
-      </div>
-      <div class="form-group">
-        <label for="password-login">Password:</label>
-        <input class="form-input" type="password" id="passwordLogin" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">login</button>
-      </div>
-    </form>
-  </div>
-  <div class="login-card">
-    <h2 class="page-title">Signup</h2>
-    <form class="form signup-form">
-      <div class="form-group">
-        <label for="username-signup">Username:</label>
-        <input class="form-input" type="text" id="usernameSignup" />
-      </div>
-      <div class="form-group">
-        <label for="email-signup">Email:</label>
-        <input class="form-input" type="text" id="emailSignup" />
-      </div>
-      <div class="form-group">
-        <label for="password-signup">Password:</label>
-        <input class="form-input" type="password" id="passwordSignup" />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">signup</button>
-      </div>
-    </form>
+<div class="-translate-x-12 mt-14 mb-36 ml-2 cardContainer p-6">
+  <div class='flex flex-col justify-between lg:flex-row bg-zinc-700 p-10 rounded-3xl'>
+    <div class="m-7 p-10 card rounded-3xl" id='loginContainer'>
+      <h2 class="text-center pb-5">Login</h2>
+      <form class="form loginForm">
+        <div class="formGroup">
+          <label for="email-login" class='mb-4'>Email:</label>
+          <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="text" id="emailLogin" autocomplete='off'/>
+        </div>
+        <div class="formGroup">
+          <label for="password-login">Password:</label>
+          <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="password" id="passwordLogin" autocomplete='off'/>
+        </div>
+        <div class="formGroup grid justify-items-center pt-5">
+          <button class="btn btn-primary border border-green-300 rounded-lg w-fit py-1 px-2" type="submit grid justify-items-center">Login</button>
+        </div>
+      </form>
+    </div>
+    <div class="m-7 p-10 card rounded-3xl" id='signupContainer'>
+      <h2 class="text-center pb-5">Signup</h2>
+      <form class="form signupForm">
+        <div class="formGroup">
+          <label for="username-signup">Username:</label>
+          <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="text" id="usernameSignup" autocomplete='off'/>
+        </div>
+        <div class="formGroup">
+          <label for="email-signup">Email:</label>
+          <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="text" id="emailSignup" autocomplete='off'/>
+        </div>
+        <div class="formGroup">
+          <label for="password-signup">Password:</label>
+          <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="password" id="passwordSignup" autocomplete='off'/>
+        </div>
+        <div class="formGroup grid justify-items-center pt-5">
+          <button class="btn btn-primary border border-green-300 rounded-lg w-fit py-1 px-2" type="submit">Signup</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 

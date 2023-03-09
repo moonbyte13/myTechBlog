@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class='bg-zinc-700 h-full' style='background-image: url(https://picsum.photos/id/{{ ranNum }}/2000?no-cache&blur=5)'style='overflow: scroll;'>
-  <div class="wrapper w-full text-green-300 h-full">
+  <div class="wrapper w-full text-green-300 h-full grid grid-col">
     
     {{> header }}
 
@@ -20,7 +20,8 @@
       {{{ body }}}
     </main>
 
-    {{> footer }}
+    <div class='block bottom-0 h-fit grid self-end'>{{> footer }}</div>
+    
   </div>
   <script src="https://cdn.tailwindcss.com"></script>
 </body>

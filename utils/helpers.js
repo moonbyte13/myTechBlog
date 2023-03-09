@@ -12,6 +12,10 @@ module.exports = {
     return word;
   },
   ranNum: () => {
-    return Math.floor(Math.random() * 100) + 101;
+    return Math.floor(Math.random() * 1000) + 100;
+  },
+  getCurrentYear: () => {
+    const year = new Date().getFullYear();
+    return year;
   }
 };

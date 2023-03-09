@@ -12,7 +12,7 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      alert('You have successfully logged in!');
+      // alert('You have successfully logged in!');
       document.location.replace('/');
     } else {
       alert('Failed to log in.');
@@ -44,9 +44,9 @@ const signupFormHandler = async (event) => {
 };
 
 document
-  .querySelector('.login-form')
+  .querySelector('.loginForm')
   .addEventListener('submit', loginFormHandler);
 
 document
-  .querySelector('.signup-form')
+  .querySelector('.signupForm')
   .addEventListener('submit', signupFormHandler);

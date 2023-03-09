@@ -4,24 +4,13 @@ const { User, Comment } = require('../../models');
 // GET comments for one post
 router.get('/:id', async (req, res) => {
   try {
-    const commentData = await Comment.findAll({
-      where: {
-        postId: req.params.id,
-      },
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
+    const comments = await Comment.findAll({
+      attributes: ['username'],
+      where: { postId: req.params.id },
+      include: [{ model: User }]
     });
 
-    const comments = commentData.map((comment) => comment.get({ plain: true }));
-
-    res.render('post', {
-      comments,
-      loggedIn: req.session.loggedIn,
-    });
+    res.render('post', { comments, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }

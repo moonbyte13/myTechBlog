@@ -1,14 +1,18 @@
-<header class='block top-0 w-full z-10 flex flex-row justify-between bg-zinc-700 p-5 border-2 border-zinc-700 mb-px'>
-    <h1 class='text-5xl' style='font-family: `Major Mono`'>A Tech Blog</h1>
-    <nav>
+<header class='block top-0 w-full z-10 flex flex-row justify-between bg-zinc-700 p-5 border-2 border-zinc-700 mb-px h-min'>
+    <a href="/">
+        <h1 class='text-5xl' style="font-family: 'Major Mono Display';">A Tech Blog</h1>
+    </a>
+    <nav class='flex items-center'>
         {{#if loggedIn}}
-        <a href="/">Homepage</a>
-        {{!-- <a href="/dashboard">Dashboard</a> --}}
-        {{!-- <a href="/dashboard/create/">Create post</a> --}}
-        <button id="logout">Logout</button>
+        <label class='m-1'>{{ uData.dataValues.username }}</label> 
+        <label class='m-1'>|</label>
+        <a class='m-1' href="/">Homepage</a>
+        <label class='m-1'>|</label>
+        <button class='m-1' id="logout">Logout</button>
         {{else}}
-        <a href="/">Homepage</a>
-        <a href="/login">Login</a>
+        <a class='m-1' href="/">Homepage</a>
+        <label class='m-1'>|</label>
+        <a class='m-1' href="/login">Login</a>
         {{/if}}
     </nav>
 </header>
