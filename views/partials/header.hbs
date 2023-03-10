@@ -5,9 +5,11 @@
     {{!-- FIXME: Not refreshing on logout --}}
     <nav class='flex items-center'>
         {{#if loggedIn}}
-        <label class='m-1'>{{ uData.dataValues.username }}</label> 
+        <label class='m-1'>{{ uData.username }}</label> 
         <label class='m-1'>|</label>
         <a class='m-1' href="/">Homepage</a>
+        <label class='m-1'>|</label>
+        <a class='m-1' href="/createPostForm">Create</a>
         <label class='m-1'>|</label>
         <button class='m-1' id="logout">Logout</button>
         {{else}}

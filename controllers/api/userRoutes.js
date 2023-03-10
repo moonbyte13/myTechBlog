@@ -67,37 +67,34 @@ router.post('/', (req, res) => {
 
 // POST /api/users/login
 router.post('/login', async (req, res) => {
-  // expects {email: 'lernantino@gmail.com', password: 'password1234'}
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
+    const userData = await User.findOne({
+      where: { email } });
 
-  const user = await User.findOne({ where: { email } });
+    if (!userData || !userData.checkPassword(password)) {
+      return res.status(400).json({ message: 'Incorrect email or password!' });
+    } else {
+      const uData = userData.dataValues;
+      req.session.save(() => {
+        req.session.userId = uData.id;
+        req.session.loggedIn = true;
+        delete uData.password;
+        res.json({ user: userData, message: 'You are now logged in!' });
+      });
+    }
 
-  if (!user) {
-    return res.status(400).json({ message: 'No user with that email!' });
+  } catch (error) {
+    res.status(500).json({ message: 'An error occurred during login!' });
   }
-
-  // Verify user
-  const validPassword = user.checkPassword(password);
-
-  if (!validPassword) {
-    return res.status(400).json({ message: 'Incorrect password!' });
-  }
-
-  req.session.save(() => {
-    // declare session variables
-    req.session.userId = user.id;
-    req.session.username = user.username;
-    req.session.loggedIn = true;
-
-    res.json({ user, message: 'You are now logged in!' });
-  });
 });
 
 // POST /api/users/logout
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
-    req.session.destroy();
-    res.status(204).end();
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
   } else {
     res.status(404).end();
   }
