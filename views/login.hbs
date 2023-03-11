@@ -1,36 +1,45 @@
 <div class="-translate-x-12 mt-14 mb-36 ml-2 cardContainer p-6">
   <div class='flex flex-col justify-between lg:flex-row bg-green-300 p-10 rounded-3xl'>
+    <!-- This card contains a form for user login -->
     <div class="m-7 p-10 card rounded-3xl bg-zinc-700" id='loginContainer'>
       <h2 class="text-center pb-5">Login</h2>
       <form class="form loginForm">
+        <!-- Form group for user email input -->
         <div class="formGroup">
           <label for="email-login" class='mb-4'>Email:</label>
           <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="text" id="emailLogin" autocomplete='off'/>
         </div>
+        <!-- Form group for user password input -->
         <div class="formGroup">
           <label for="password-login">Password:</label>
           <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="password" id="passwordLogin" autocomplete='off'/>
         </div>
+        <!-- Form group for login button -->
         <div class="formGroup grid justify-items-center pt-5">
           <button class="btn btn-primary border border-green-300 rounded-lg w-fit py-1 px-2" type="submit grid justify-items-center">Login</button>
         </div>
       </form>
     </div>
+    <!-- This card contains a form for user signup -->
     <div class="m-7 p-10 card rounded-3xl bg-zinc-700" id='signupContainer'>
       <h2 class="text-center pb-5">Signup</h2>
       <form class="form signupForm">
+        <!-- Form group for user username input -->
         <div class="formGroup">
           <label for="username-signup">Username:</label>
           <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="text" id="usernameSignup" autocomplete='off'/>
         </div>
+        <!-- Form group for user email input -->
         <div class="formGroup">
           <label for="email-signup">Email:</label>
           <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="text" id="emailSignup" autocomplete='off'/>
         </div>
+        <!-- Form group for user password input -->
         <div class="formGroup">
           <label for="password-signup">Password:</label>
           <input class="form-input bg-transparent border rounded-lg m-1 p-1 border-green-300" type="password" id="passwordSignup" autocomplete='off'/>
         </div>
+        <!-- Form group for signup button -->
         <div class="formGroup grid justify-items-center pt-5">
           <button class="btn btn-primary border border-green-300 rounded-lg w-fit py-1 px-2" type="submit">Signup</button>
         </div>

@@ -1,11 +1,18 @@
+<!-- A container for a single post -->
 <div class='w-5/6 -translate-x-12 px-10 mt-14 mb-36 ml-2 cardContainer'>
+  <!-- The card containing the post details -->
   <div class="flex text-zinc-700 bg-green-300 rounded-xl p-2 my-10 w-80 card w-full" id='card{{post.id}}'>
       <div class="w-full py-3 px-5">
+          <!-- A form to edit the post details -->
           <form class='editPostForm'>
             <div class="h-full grid grid-rows-12 grid-cols-7">
+              <!-- An input field to edit the post title -->
               <input type='text' class="bg-transparent font-bold text-xl text-zinc-700 h-fit col-span-5 mb-5" value='{{post.title}}' placeholder='Title' id='editPostTitle' data-post-id='{{post.id}}' autocomplete='off'/>
+              <!-- An input field to edit the post content -->
               <textarea type='text' class='bg-transparent text-zinc-700 row-start-4 row-end-10 col-span-5' placeholder='Content' id='editPostContent' autocomplete='off'>{{post.postContent}}</textarea>
+              <!-- An input field to edit the post url -->
               <input type='text' class='bg-transparent text-zinc-700 row-start-5 col-span-5' value='{{post.url}}' placeholder='Url' id='editPostLink' autocomplete='off'/>
+              <!-- A button to save the edited post -->
               <div class='grid justify-center row-start-5 col-start-6 col-span-2'>
                   <button type='submit' class='btn btn-primary border border-zinc-700 rounded-lg h-fit w-fit py-1 px-2' id='editSaveBtn'>Save</button>
               </div>
