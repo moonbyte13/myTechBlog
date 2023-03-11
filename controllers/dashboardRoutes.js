@@ -5,16 +5,10 @@ const withAuth = require('../utils/auth');
 // get all posts for dashboard
 router.get('/', withAuth, async (req, res) => {
   try {
-    const posts = await Post.findAll({
+    const postData = await Post.findAll({
       where: { userId: req.session.userId },
-      attributes: ['id', 'title', 'content', 'created_at'],
+      attributes: ['id', 'title', 'postContent', 'createdAt'],
       include: [
-        {
-          model: Comment,
-          attributes: ['id', 'commentText', 'postId', 'userId', 'createdAt'],
-          include: { model: User, attributes: ['username'] } // nested include added for User model data associated with Comment model data
-        }, // end of Comment include object
-
         {
           model: User, attributes: ['username']
         } // added for User model data associated with Post model data
@@ -22,8 +16,9 @@ router.get('/', withAuth, async (req, res) => {
       ] // end of include array
 
     }); // end of Post.findAll()
-
-    res.render('dashboard', { posts, loggedIn: true });
+    const posts = postData.map((post) => post.get({ plain: true }));
+    const username = req.session.username;
+    res.render('dashboard', { posts, username, loggedIn: true });
 
   } catch (err) {
     console.log(err); res.status(500).json(err);

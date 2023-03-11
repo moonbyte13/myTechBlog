@@ -23,31 +23,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET dashboard
-router.get('/dashboard', async (req, res) => {
-  try {
-    const userData = await User.findByPk(req.session.userId, {
-      attributes: {
-        exclude: ['password']
-      },
-      include: [{
-        model: Post
-      }],
-    });
-
-    const user = userData.get({
-      plain: true
-    });
-
-    res.render('homepage', {
-      user,
-      loggedIn: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // GET details with single post
 router.get('/details/:id', async (req, res) => {
   try {

@@ -1,20 +1,19 @@
-<section class="new-post-section">
-    <button type="submit" class="btn" id="create-new-post">+ Create new post</button>
-</section>
-
-
-{{#if posts.length}}
-<section>
-    <h2>Your Dashboard</h2>
-    <ul class="post-list">
-        {{#each posts as |post|}}
-        <li>
-            {{> post-info post}}
-            <a href="/dashboard/edit/{{post.id}}" class="edit-link">edit post</a>
-        </li>
-        {{/each}}
-    </ul>
-</section>
-{{/if}}
-
-<script src="/javascript/create-post.js"></script>
+<div class='w-5/6 -translate-x-12 px-10 mt-14 mb-36 ml-2 cardContainer'>
+    {{#each posts as |post|}}
+        <a href="/details/{{this.id}}" class="">
+            <div class="flex border border-gray-900 text-zinc-700 bg-green-300 rounded-xl p-2 my-10 w-80 h-32 card w-full" id='card{{this.id}}'>
+                <div class="w-full">
+                    <div class="h-full grid grid-rows-2 grid-cols-7">
+                        <p class="font-bold text-2xl col-span-5" style="font-family: 'Major Mono Display';">{{this.title}}</p>
+                        <div class='justify-self-end col-start-6 col-span-2 pr-5'>{{ formatDateUTC this.createdAt }}</div>
+                        {{!-- <div class='col-start-7'>{{this.likes}} likes</div> --}}
+                        <div class='self-end row-start-2 col-span-6'>Click To View More!</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {{/each}}
+    <a class='m-7 w-full flex justify-center' href="/createPostForm">
+        <p class='px-3 py-2 card rounded-full hover:cursor-pointer'>Create</p>
+    </a>
+</div>
