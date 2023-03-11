@@ -5,7 +5,7 @@
                 <div class="w-full">
                     <div class="h-full grid grid-rows-2 grid-cols-7">
                         <p class="font-bold text-2xl col-span-5" style="font-family: 'Major Mono Display';">{{this.title}}</p>
-                        <div class='justify-self-end col-start-6 col-span-2 pr-5'>By: {{this.user.username}}</div>
+                        <div class='justify-self-end col-start-6 col-span-2 pr-5'>{{ hoursAndDaysFromToday (formatDayFull this.createdAt) (formatTimeFull this.createdAt) }}</div>
                         {{!-- <div class='col-start-7'>{{this.likes}} likes</div> --}}
                         <div class='self-end row-start-2 col-span-6'>Click To View More!</div>
                     </div>

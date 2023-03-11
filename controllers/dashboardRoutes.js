@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../models');
+const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 // get all posts for dashboard
@@ -11,7 +11,7 @@ router.get('/', withAuth, async (req, res) => {
       include: [
         {
           model: Comment,
-          attributes: ['id', 'comment_text', 'postId', 'userId', 'created_at'],
+          attributes: ['id', 'commentText', 'postId', 'userId', 'createdAt'],
           include: { model: User, attributes: ['username'] } // nested include added for User model data associated with Comment model data
         }, // end of Comment include object
 

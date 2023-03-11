@@ -2,7 +2,8 @@
   <div class="flex border border-gray-900 text-zinc-700 bg-green-300 rounded-xl p-2 my-10 w-80 card w-full" id='card{{post.id}}'>
       <div class="w-full py-3 px-5">
           <div class="h-full grid grid-rows-4 grid-cols-7">
-              <p class="font-bold text-xl h-fit col-span-6" style="font-family: 'Major Mono Display';">{{post.title}}</p>
+              <p class="font-bold text-xl h-fit col-span-5" style="font-family: 'Major Mono Display';">{{post.title}}</p>
+              <div class='justify-self-end row-1 col-start-6 col-span-2 pr-5'>By: {{post.user.username}}</div>
               {{!-- <div class="h-fit col-start-7">{{post.likeCount}} likes</div> --}}
               <div class='row-start-2 row-span-3 col-span-7 h-fit w-fit'>
                 <p class=''>
@@ -28,6 +29,16 @@
                 </svg>
               </button> 
               --}}
+              {{#if (isEqual post.user.id uId)}}
+                <div class='flex flex-row justify-around col-start-6 col-span-2'>
+                  <div class=''>
+                    <a href="/post/{{post.id}}/edit" class='text-sm underline'>Edit</a>
+                  </div>
+                  <div class=''>
+                    <a href="/post/{{post.id}}" class='text-sm underline'>Delete</a>
+                  </div>
+                </div>
+              {{/if}}
           </div>
       </div>
   </div>

@@ -13,6 +13,7 @@ const newPostHandler = async (event) => {
     });
     if (response.ok) {
       document.location.replace('/');
+      alert('Post created!');
     } else {
       alert('Failed to create post');
     }
