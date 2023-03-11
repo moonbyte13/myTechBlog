@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
+const { User, Post } = require('../../models');
 
 // GET all posts for homepage
 router.get('/', async (req, res) => {
@@ -15,48 +15,19 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('homepage', {
-      posts,
-      loggedIn: req.session.loggedIn,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// GET a single post
-router.get('/post/:id', async (req, res) => {
-  try {
-    const postData = await Post.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-        {
-          model: Comment,
-          include: [
-            User,
-          ],
-        },
-      ],
-    });
-
-    const post = postData.get({ plain: true });
-
-    res.render('post', {
-      post,
-      loggedIn: req.sessionloggedIn,
-    });
+    res.json({ posts, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // POST /api/post
-router.post('/post', async (req, res) => {
+router.post('/createPost', async (req, res) => {
   try {
-    const postData = await Post.create(req.body);
+    const postData = await Post.create({
+      ...req.body,
+      userId: req.session.userId,
+    });
 
     res.status(200).json(postData);
   } catch (err) {

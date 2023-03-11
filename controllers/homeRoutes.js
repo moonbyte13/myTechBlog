@@ -11,12 +11,7 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
     if(req.session.loggedIn) { // checking existence of session object before accessing its property
-      const uData = await User.findByPk(req.session.userId, {
-        attributes: {
-          exclude: ['password']
-        }
-      });
-      res.render('homepage', { posts, uData: uData.toJSON(), loggedIn: true });
+      res.render('homepage', { posts, loggedIn: true });
     } else {
       res.render('homepage', { posts, loggedIn: false });
     }
@@ -27,7 +22,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET dashboard
-router.get('/dashboard', withAuth, async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.userId, {
       attributes: {
@@ -61,12 +56,7 @@ router.get('/details/:id', async (req, res) => {
     const post = postData.get({ plain: true });
 
     if(req.session.loggedIn) {
-      const uData = await User.findByPk(req.session.userId, {
-        attributes: {
-          exclude: ['password']
-        }
-      });
-      res.render('postDetails', { post, uData: uData.toJSON(), loggedIn: true });
+      res.render('postDetails', { post, loggedIn: true });
     } else {
       res.render('postDetails', { post, loggedIn: false });
     }
@@ -91,19 +81,6 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
-});
-
-router.post('/createPost', withAuth, async (req, res) => {
-  try {
-    const postData = await Post.create({
-      ...req.body,
-      userId: req.session.userId,
-    });
-
-    res.status(200).json(postData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
 });
 
 router.get('/createPostForm', withAuth, async (req, res) => {

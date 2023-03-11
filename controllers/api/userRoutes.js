@@ -1,86 +1,46 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
+const { User } = require('../../models');
 
-// GET all users
-router.get('/', async (req, res) => {
+
+// POST /api/users
+router.post('/', async (req, res) => {
   try {
-    // Access our User model and run .findAll() method)
-    const dbUserData = await User.findAll({
-      attributes: { exclude: ['password'] }
+    const dbUserData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
     });
 
-    res.json(dbUserData);
+    req.session.userId = dbUserData.id;
+    req.session.username = dbUserData.username;
+    req.session.loggedIn = true;
+    req.session.save();
 
+    res.json(dbUserData);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
 
-// GET one user
-router.get('/:id', (req, res) => {
-  User.findOne({
-    attributes: { exclude: ['password'] },
-    where: {
-      id: req.params.id
-    },
-    include: [{ // include the Post model here:
-      model: Post,
-      attributes: ['id', 'title', 'post_url', 'created_at'],
-      include:[{ // include the Comment model here:
-        model: Comment,
-        attributes: ['id', 'commentText', 'created_at'],
-      }]
-    }]
-  })
-    .then(dbUserData => {
-      if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-// POST /api/users
-router.post('/', (req, res) => {
-  // expects {username: 'lernantino', password: 'password1234'}
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  })
-    .then(dbUserData => {
-      req.session.save(() => {
-        req.session.userId = dbUserData.id;
-        req.session.username = dbUserData.username;
-        req.session.loggedIn = true;
-
-        res.json(dbUserData);
-      });
-    });
-});
-
+// NOTE: This is how I should be doing all my response.json() calls
 // POST /api/users/login
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const userData = await User.findOne({
-      where: { email } });
+      where: { email }
+    });
 
     if (!userData || !userData.checkPassword(password)) {
       return res.status(400).json({ message: 'Incorrect email or password!' });
     } else {
       const uData = userData.dataValues;
+      delete uData.password;
       req.session.save(() => {
         req.session.userId = uData.id;
+        req.session.username = uData.username;
         req.session.loggedIn = true;
-        delete uData.password;
-        res.json({ user: userData, message: 'You are now logged in!' });
+        res.json({ user: uData, message: 'You are now logged in!' });
       });
     }
 
