@@ -5,14 +5,20 @@ const withAuth = require('../utils/auth');
 // GET all posts for homepage
 router.get('/', async (req, res) => {
   try {
+    // Get all posts and JOIN with user data
     const postData = await Post.findAll({
       include: [{ model: User, attributes: ['username'] }]
     });
 
+    // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
+
     if(req.session.loggedIn) { // checking existence of session object before accessing its property
+      // Set the session username to a variable
       const username = req.session.username;
+      // Set the session user id to a variable
       const uId = req.session.userId;
+      // Respond with the homepage template and the serialized data
       res.render('homepage', { posts, username, uId, loggedIn: true });
     } else {
       res.render('homepage', { posts, loggedIn: false });
@@ -26,15 +32,21 @@ router.get('/', async (req, res) => {
 // GET details with single post
 router.get('/details/:id', async (req, res) => {
   try {
+    // Get all posts and JOIN with user data
     const postData = await Post.findByPk(req.params.id, {
       include: [{ model: User, attributes: ['id', 'username'] }]
     });
 
+    // Serialize data so the template can read it
     const post = postData.get({ plain: true });
 
+    // Respond with the homepage template and the serialized data
     if(req.session.loggedIn) {
+      // Set the session username to a variable
       const username = req.session.username;
+      // Set the session user id to a variable
       const uId = req.session.userId;
+      // Respond with the homepage template and the serialized data
       res.render('postDetails', { post, username, uId, loggedIn: true });
     } else {
       res.render('postDetails', { post, loggedIn: false });
@@ -42,14 +54,6 @@ router.get('/details/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
-
-// GET sign up
-router.get('/signUp', (req, res) => {
-  if (req.session.loggedIn) {
-    return res.redirect('/');
-  }
-  res.render('signUp');
 });
 
 // GET login
@@ -63,15 +67,20 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/createPostForm', withAuth, async (req, res) => {
+  // If the user is already logged in, redirect the request to another route
   if (req.session.loggedIn) {
     try {
+      // Get all posts and JOIN with user data
       const userData = await User.findOne({
         where: { id: req.session.userId },
         attributes: { exclude: ['password'] }
       });
+      // Set the session username to a variable
       const username = req.session.username;
-      username.value = req.session.userId;
-      res.render('createPost', { userData, username, loggedIn: true });
+      // Set the session user id to a variable
+      const uId = req.session.userId;
+      // Respond with the homepage template and the serialized data
+      res.render('createPost', { userData, username, uId, loggedIn: true });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -79,16 +88,22 @@ router.get('/createPostForm', withAuth, async (req, res) => {
 });
 
 router.get('/editPost/:id', withAuth, async (req, res) => {
+  // If the user is already logged in, redirect the request to another route
   if (req.session.loggedIn) {
     try {
+      // Get all posts and JOIN with user data
       const postData = await Post.findOne({
         where: { id: req.params.id },
         attributes: { exclude: ['password'] }
       });
+      // Serialize data so the template can read it
       const post = postData.get({ plain: true });
+      // Set the session username to a variable
       const username = req.session.username;
-      username.value = req.session.userId;
-      res.render('editPost', { post, username, loggedIn: true });
+      // Set the session user id to a variable
+      const uId = req.session.userId;
+      // Respond with the homepage template and the serialized data
+      res.render('editPost', { post, username, uId, loggedIn: true });
     } catch (err) {
       res.status(500).json(err);
     }
