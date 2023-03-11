@@ -1,6 +1,7 @@
 // JS for the 404 page
 const goBackBtn = document.querySelector('.button-49');
 
+// Function to go back to the previous page
 const goBack = (e) => {
   e.preventDefault();
 
@@ -8,4 +9,5 @@ const goBack = (e) => {
   history.back();
 };
 
+// Event listener for the go back button
 goBackBtn.addEventListener('click', goBack);
