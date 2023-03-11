@@ -33,9 +33,18 @@ router.get('/', async (req, res) => {
 router.get('/details/:id', async (req, res) => {
   try {
     // Get all posts and JOIN with user data
+    // FIXME: jumping straight to line 63 without getting the post data
+    // NOTE: only started after adding the model: Comment to the include array
     const postData = await Post.findByPk(req.params.id, {
-      include: [{ model: User, attributes: ['id', 'username'] }]
+      include: [
+        { model: User, attributes: ['id', 'username'] },
+        { model: Comment,
+          attributes: ['id', 'commentText', 'userId', 'post_id', 'createdAt'], include: [{ model: User, attributes: ['username'] }],
+          where: { postId: req.params.id }
+        }
+      ]
     });
+
 
     // Serialize data so the template can read it
     const post = postData.get({ plain: true });
@@ -47,7 +56,7 @@ router.get('/details/:id', async (req, res) => {
       // Set the session user id to a variable
       const uId = req.session.userId;
       // Respond with the homepage template and the serialized data
-      res.render('postDetails', { post, username, uId, loggedIn: true });
+      res.render('postDetails', { post, username, comments, uId, loggedIn: true });
     } else {
       res.render('postDetails', { post, loggedIn: false });
     }
