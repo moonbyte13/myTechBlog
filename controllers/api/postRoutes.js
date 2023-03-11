@@ -22,16 +22,20 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/post
-router.post('/createPost', async (req, res) => {
+router.post('/post', async (req, res) => {
   try {
+    if (!Post) {
+      throw new Error('Post model not found');
+    }
+    req.body.userId = await req.session.userId;
     const postData = await Post.create({
       ...req.body,
-      userId: req.session.userId,
     });
 
     res.status(200).json(postData);
   } catch (err) {
-    res.status(400).json(err);
+    console.error(err);
+    res.status(500).json({ error: 'Post creation failed' });
   }
 });
 
@@ -75,7 +79,7 @@ router.delete('/post/:id', async (req, res) => {
   }
 });
 
-// PUT /api/post/likeCount
+/* // PUT /api/post/likeCount
 router.post('/post/:id/likeCount', async (req, res) => {
   try {
     const likeData = await Post.update(
@@ -97,6 +101,6 @@ router.post('/post/:id/likeCount', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}); */
 
 module.exports = router;

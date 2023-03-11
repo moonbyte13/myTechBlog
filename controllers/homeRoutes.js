@@ -11,7 +11,9 @@ router.get('/', async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
     if(req.session.loggedIn) { // checking existence of session object before accessing its property
-      res.render('homepage', { posts, loggedIn: true });
+      const username = req.session.username;
+      const uId = req.session.userId;
+      res.render('homepage', { posts, username, uId, loggedIn: true });
     } else {
       res.render('homepage', { posts, loggedIn: false });
     }
@@ -56,7 +58,9 @@ router.get('/details/:id', async (req, res) => {
     const post = postData.get({ plain: true });
 
     if(req.session.loggedIn) {
-      res.render('postDetails', { post, loggedIn: true });
+      const username = req.session.username;
+      const uId = req.session.userId;
+      res.render('postDetails', { post, username, uId, loggedIn: true });
     } else {
       res.render('postDetails', { post, loggedIn: false });
     }
@@ -90,7 +94,9 @@ router.get('/createPostForm', withAuth, async (req, res) => {
         where: { id: req.session.userId },
         attributes: { exclude: ['password'] }
       });
-      res.render('createPost', { userData, loggedIn: true });
+      const username = req.session.username;
+      username.value = req.session.userId;
+      res.render('createPost', { userData, username, loggedIn: true });
     } catch (err) {
       res.status(500).json(err);
     }

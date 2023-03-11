@@ -2,25 +2,25 @@
   {
     "title": "Wired",
     "postContent": "Wired is one of the most popular tech blogs in the industry. It features articles on all aspects of technology and how it shapes our lives, touching on politics, transport, security, and culture. The tone is light and snarky, making it engaging as well as informative.",
-    "userId": 6,
+    "userId": 5,
     "url": "https://www.wired.com/"
   },
   {
     "title": "MIT Technology Review",
     "postContent": "If you’re looking for a tech blog, MIT Technology Review should be one of the first you click through to. MIT Technology Review features topics like AI, biotechnology, computing, climate change and so much more.",
-    "userId": 6,
+    "userId": 5,
     "url": "https://www.technologyreview.com/"
   },
   {
     "title": "TechCrunch",
     "postContent": "TechCrunch has the latest news on gadgets and gizmos, apps, and tech events. TechCrunch even has sections for those looking specifically for video and audio when searching for new tech news.",
-    "userId": 6,
+    "userId": 4,
     "url": "https://techcrunch.com/"
   },
   {
     "title": "Gizmodo",
     "postContent": "Gizmodo is the go-to blog for tech, science and culture. Gizmodo focuses on sharing tech content with occasional humor — and always with blunt honesty. With a history dating back to 2002, Gizmodo is a long-established and well-respected news source.",
-    "userId": 6,
+    "userId": 2,
     "url": "https://gizmodo.com/"
   },
   {

@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 const { User } = require('../../models');
 
 
@@ -24,27 +25,28 @@ router.post('/', async (req, res) => {
 
 // NOTE: This is how I should be doing all my response.json() calls
 // POST /api/users/login
+
 router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-    const userData = await User.findOne({
-      where: { email }
-    });
-
-    if (!userData || !userData.checkPassword(password)) {
+    const userData = await User.findOne({ where: { email } });
+    if (!userData) {
       return res.status(400).json({ message: 'Incorrect email or password!' });
-    } else {
-      const uData = userData.dataValues;
-      delete uData.password;
-      req.session.save(() => {
-        req.session.userId = uData.id;
-        req.session.username = uData.username;
-        req.session.loggedIn = true;
-        res.json({ user: uData, message: 'You are now logged in!' });
-      });
     }
-
+    const validPassword = await bcrypt.compare(password, userData.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Incorrect email or password!' });
+    }
+    const uData = userData.toJSON();
+    delete uData.password;
+    req.session.save(() => {
+      req.session.userId = uData.id;
+      req.session.username = uData.username;
+      req.session.loggedIn = true;
+      res.json({ user: uData, message: 'You are now logged in!' });
+    });
   } catch (error) {
+    console.log('Login Error:', error);
     res.status(500).json({ message: 'An error occurred during login!' });
   }
 });
