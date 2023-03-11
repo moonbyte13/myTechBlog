@@ -4,7 +4,6 @@
           <div class="h-full grid grid-rows-4 grid-cols-7">
               <p class="font-bold text-xl h-fit col-span-5" style="font-family: 'Major Mono Display';">{{post.title}}</p>
               <div class='justify-self-end row-1 col-start-6 col-span-2 pr-5'>By: {{post.user.username}}</div>
-              {{!-- <div class="h-fit col-start-7">{{post.likeCount}} likes</div> --}}
               <div class='row-start-2 row-span-3 col-span-7 h-fit w-fit'>
                 <p class=''>
                   {{post.postContent}}
@@ -13,29 +12,13 @@
                   </div>
                 </p>
               </div>
-              {{!-- 
-              <button class='justify-self-end col-span-3' id='likeBtn' value='{{post.id}}'>
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                width="100" height="100"
-                viewBox="0 0 24 24">
-                  <path fill='rgb(63 63 70)' d="M 12.601563 1 C 13.5 2.5 12.699219 4.300781 12.199219 6 C 11.699219 7.699219 12.101563 8.800781 13.800781 8.601563 C 16 8.398438 16.800781 8 18.5 8 C 20.300781 8 20.699219 8.601563 20.800781 9.101563 C 20.898438 9.800781 20.5 10.199219 20.5 10.601563 C 20.5 11 22 11.199219 22 12.5 C 22 13.898438 20.800781 13.800781 20.800781 14.199219 C 20.800781 14.601563 21.800781 14.800781 21.800781 15.898438 C 21.800781 17 20.398438 17.101563 20.398438 17.601563 C 20.398438 18.101563 20.898438 18.199219 20.898438 18.898438 C 20.898438 19.601563 19.5 21.101563 14.5 21.101563 C 6 21 7 19 3 19 L 3 11.5 C 5.101563 11.5 5 9.699219 6.398438 8.300781 C 7.800781 6.800781 9.699219 3.5 10.199219 1 C 10.601563 -0.699219 12.101563 0.101563 12.601563 1 Z"></path>
-                </svg>
-              </button>
-              <button class='col-start-5 col-span-3' id='dislikeBtn' value='{{post.id}}'>
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                width="100" height="100"
-                viewBox="0 0 24 24">
-                  <path fill='rgb(63 63 70)' d="M 12.601563 23 C 13.5 21.5 12.699219 19.699219 12.199219 18 C 11.699219 16.300781 12.101563 15.199219 13.800781 15.398438 C 15.898438 15.601563 16.699219 16.101563 18.5 16.101563 C 20.300781 16.101563 20.699219 15.5 20.800781 15 C 20.898438 14.300781 20.5 13.898438 20.5 13.5 C 20.5 13.101563 22 12.898438 22 11.601563 C 22 10.199219 20.800781 10.300781 20.800781 9.898438 C 20.800781 9.5 21.800781 9.300781 21.800781 8.199219 C 21.800781 7.101563 20.398438 7 20.398438 6.5 C 20.398438 6 20.898438 5.898438 20.898438 5.199219 C 20.898438 4.5 19.5 3 14.5 3 C 6 3 7 5 3 5 L 3 12.5 C 5.101563 12.5 5 14.300781 6.398438 15.699219 C 7.800781 17.101563 9.699219 20.398438 10.199219 22.898438 C 10.601563 24.699219 12.101563 23.898438 12.601563 23 Z"></path>
-                </svg>
-              </button> 
-              --}}
               {{#if (isEqual post.user.id uId)}}
                 <div class='flex flex-row justify-around col-start-6 col-span-2'>
                   <div class=''>
-                    <a href="/post/{{post.id}}/edit" class='text-sm underline'>Edit</a>
+                    <a href='/editPost/{{post.id}}' class='text-sm underline hover:cursor-pointer' id='editPostFormBtn'>Edit</a>
                   </div>
                   <div class=''>
-                    <a href="/post/{{post.id}}" class='text-sm underline'>Delete</a>
+                    <a class='text-sm underline hover:cursor-pointer' data-post-id='{{post.id}}' id='deletePostBtn'>Delete</a>
                   </div>
                 </div>
               {{/if}}
@@ -43,4 +26,4 @@
       </div>
   </div>
 </div>
-<script src="/js/likeDislike.js"></script>
+<script src="/js/deletePost.js"></script>

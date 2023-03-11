@@ -38,3 +38,16 @@
   background-color: #9400d3;
   box-shadow: 0 0 2px 2px #9400d3, 15px 15px 2px -4px #ffffff00, 15px 15px 4px 0 #4b0082, 30px 30px 2px -4px #ffffff00, 30px 30px 4px 0 #0000ff, 45px 45px 2px -4px #ffffff00, 45px 45px 4px 0 #00ff00, 60px 60px 4px -2px #ffffff00, 60px 60px 4px 0 #ffff00, 75px 75px 4px -2px #ffffff00, 75px 75px 4px 0 #ff7f00, 90px 90px 4px -2px #ffffff00, 90px 90px 4px 0 #ff0000;
 }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #3f3f46;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #3f3f46;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #3f3f46;
+}

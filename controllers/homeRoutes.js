@@ -78,4 +78,21 @@ router.get('/createPostForm', withAuth, async (req, res) => {
   }
 });
 
+router.get('/editPost/:id', withAuth, async (req, res) => {
+  if (req.session.loggedIn) {
+    try {
+      const postData = await Post.findOne({
+        where: { id: req.params.id },
+        attributes: { exclude: ['password'] }
+      });
+      const post = postData.get({ plain: true });
+      const username = req.session.username;
+      username.value = req.session.userId;
+      res.render('editPost', { post, username, loggedIn: true });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+});
+
 module.exports = router;
