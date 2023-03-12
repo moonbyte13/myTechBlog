@@ -49,8 +49,7 @@ router.get('/details/:id', async (req, res) => {
               model: User,
               attributes: ['username']
             }
-          ],
-          where: { postId: req.params.id }
+          ]
         }
       ]
     });
@@ -76,7 +75,6 @@ router.get('/details/:id', async (req, res) => {
 
 // GET login
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.loggedIn) {
     return res.redirect('/');
   }
@@ -85,10 +83,9 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/createPostForm', withAuth, async (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.loggedIn) {
     try {
-      // Get all posts and JOIN with user data
+      // get user data
       const userData = await User.findOne({
         where: { id: req.session.userId },
         attributes: { exclude: ['password'] }
@@ -104,6 +101,26 @@ router.get('/createPostForm', withAuth, async (req, res) => {
     }
   }
 });
+
+router.get('/createCommentForm/:id', withAuth, async (req, res) => {
+  if (req.session.loggedIn) {
+    try {
+      const postData = await Post.findOne({
+        where: { id: req.params.id }
+      });
+      const post = postData.get({ plain: true });
+      // Set the session username to a variable
+      const username = req.session.username;
+      // Set the session user id to a variable
+      const uId = req.session.userId;
+      // Respond with the homepage template and the serialized data
+      res.render('createComment', { post, username, uId, loggedIn: true });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+});
+
 
 router.get('/editPost/:id', withAuth, async (req, res) => {
   // If the user is already logged in, redirect the request to another route

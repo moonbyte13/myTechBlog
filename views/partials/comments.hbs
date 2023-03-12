@@ -1,4 +1,9 @@
 <div class='w-5/6 -translate-x-12 mt-6 mb-36 ml-2 cardContainer'>
+  {{#if loggedIn}}
+    <a class='m-7 w-full flex justify-center' href="/createCommentForm/{{post.id}}">
+      <p class='px-3 py-2 card rounded-full hover:cursor-pointer bg-zinc-700' data-value='{{post.id}}'>Create Comment</p>
+    </a>
+  {{/if}}
   {{#each post.comments as |comment|}}
     <div class='card rounded-lg m-10 px-5 py-3 bg-green-300 text-zinc-700 grid grid-cols-12'>
       <p class='col-span-8'>{{comment.commentText}}</p>
@@ -8,3 +13,4 @@
   {{/each}}
 </div>
 
+<script src="/js/createComment"></script>
