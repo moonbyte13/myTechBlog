@@ -33,7 +33,6 @@ router.get('/', async (req, res) => {
 router.get('/details/:id', async (req, res) => {
   try {
     // Get all posts and JOIN with user data
-    // FIXME: if no comments on post, it will not render
     const postData = await Post.findByPk(req.params.id, {
       include: [
         {
@@ -57,15 +56,24 @@ router.get('/details/:id', async (req, res) => {
     // Serialize data so the template can read it
     const post = postData.get({ plain: true });
 
+    for (let i = 0; i < post.comments.length; i++) {
+      const element = post.comments[i];
+      element.currentUser = req.session.userId;
+      // console.log(element);
+    }
+
+    // console.log(JSON.stringify(post, null, 2));
+
     // Respond with the homepage template and the serialized data
     if(req.session.loggedIn) {
       // Set the session username to a variable
-      const username = req.session.username;
-      // Set the session user id to a variable
-      const uId = await req.session.userId;
-      console.log({uId: uId});
+      const userData = {
+        username: req.session.username,
+        id: req.session.userId
+      };
+      // console.log(userData);
       // Respond with the homepage template and the serialized data
-      res.render('postDetails', { post, username, uId, loggedIn: true });
+      res.render('postDetails', { post, userData, loggedIn: true });
     } else {
       res.render('postDetails', { post });
     }
@@ -124,7 +132,6 @@ router.get('/createCommentForm/:id', withAuth, async (req, res) => {
 
 
 router.get('/editPost/:id', withAuth, async (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.loggedIn) {
     try {
       // Get all posts and JOIN with user data
@@ -145,5 +152,28 @@ router.get('/editPost/:id', withAuth, async (req, res) => {
     }
   }
 });
+
+router.get('/editComment/:commentId/', withAuth, async (req, res) => {
+  if (req.session.loggedIn) {
+    try {
+      // Get all comments and JOIN with user data
+      const commentData = await Comment.findOne({
+        where: { id: req.params.commentId },
+        attributes: { exclude: ['password'] }
+      });
+      // Serialize data so the template can read it
+      const comment = commentData.get({ plain: true });
+      // Set the session username to a variable
+      const username = req.session.username;
+      // Set the session user id to a variable
+      const uId = req.session.userId;
+      // Respond with the homepage template and the serialized data
+      res.render('editComment', { comment, username, uId, loggedIn: true });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+});
+
 
 module.exports = router;

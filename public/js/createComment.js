@@ -13,7 +13,7 @@ const newCommentHandler = async (event) => {
     });
     // If the response is ok, redirect to the dashboard and alert the user that the post was created
     if (response.ok) {
-      document.location.replace('/dashboard');
+      document.location.replace(`/details/${ postId }`);
       alert('Comment created!');
     } else {
       alert('Failed to create post');

@@ -13,7 +13,7 @@
                   </div>
                 </p>
               </div>
-              {{#if (isEqual post.userId uId)}} <!-- A condition to check if the post author id is equal to the user id -->
+              {{#if (isEqual post.userId userData.id)}} <!-- A condition to check if the post author id is equal to the user id -->
                 <div class='flex flex-row justify-end col-start-6 col-span-2'> <!-- Div for the buttons to edit and delete the post -->
                   <div class='pr-2'>
                     <a href='/editPost/{{post.id}}' class='text-sm underline hover:cursor-pointer' id='editPostFormBtn'>Edit</a> <!-- Button to edit the post -->
@@ -28,4 +28,5 @@
   </div>
 </div>
 {{> comments}}
-<script src="/js/deletePost.js"></script> <!-- Script to handle the delete post button -->
+<script src="/js/deletePost.js"></script>
+<script src="/js/deleteComment.js"></script>
