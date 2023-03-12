@@ -77,6 +77,6 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 * What is the Repo link?
   * <a href='https://github.com/moonphase13/myTechBlog' target='_blank'>***Repo***</a>
 * What is the Deployed link?
-  * <a href=' https://moonphase13.github.io/myTechBlog/' target='_blank'>***Deployment***</a>
+  * <a href='https://my-tech-blog-c14.herokuapp.com' target='_blank'>***Deployment***</a>
 * What is your Github link?
   * <a href='https://github.com/moonphase13' target='_blank'>***Github***</a>
