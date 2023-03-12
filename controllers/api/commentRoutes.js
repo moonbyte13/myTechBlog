@@ -2,12 +2,13 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
 
-router.post('comment', async (req, res) => {
+router.post('/comment', async (req, res) => {
   try {
+    console.log(req.body);
     const dbCommentData = await Comment.create({
-      commentText: req.body.commentText,
+      commentText: body.commentText,
       userId: req.session.userId,
-      postId: req.body.postId
+      postId: body.postId
     });
     res.json(dbCommentData);
   } catch (err) {
@@ -15,7 +16,7 @@ router.post('comment', async (req, res) => {
   }
 });
 
-router.delete('comment/:id', async (req, res) => {
+router.delete('/comment/:id', async (req, res) => {
   try {
     const dbCommentData = await Comment.destroy({
       where: {
@@ -32,7 +33,7 @@ router.delete('comment/:id', async (req, res) => {
   }
 });
 
-router.put('comment/:id', async (req, res) => {
+router.put('/comment/:id', async (req, res) => {
   try {
     const dbCommentData = await Comment.update(
       {

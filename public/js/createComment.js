@@ -9,6 +9,7 @@ const newCommentHandler = async (event) => {
     const response = await fetch('/api/comments/comment', {
       method: 'POST',
       body: JSON.stringify({ commentText, postId }),
+      headers: { 'Content-Type': 'application/json' },
     });
     // If the response is ok, redirect to the dashboard and alert the user that the post was created
     if (response.ok) {
