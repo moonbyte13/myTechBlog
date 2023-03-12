@@ -10,6 +10,7 @@
       <p class='col-start-9 col-span-2 grid justify-self-end pr-5'>By: {{comment.user.username}}</p>
       <div class='justify-self-start col-start-11 col-span-2'>{{ formatDateUTC comment.createdAt }}</div>
     </div>
+    {{#if (isEqual comment.userId uId)}}
   {{/each}}
 </div>
 
