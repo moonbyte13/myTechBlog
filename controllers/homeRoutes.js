@@ -62,7 +62,8 @@ router.get('/details/:id', async (req, res) => {
       // Set the session username to a variable
       const username = req.session.username;
       // Set the session user id to a variable
-      const uId = req.session.userId;
+      const uId = await req.session.userId;
+      console.log({uId: uId});
       // Respond with the homepage template and the serialized data
       res.render('postDetails', { post, username, uId, loggedIn: true });
     } else {

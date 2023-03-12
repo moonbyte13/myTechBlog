@@ -6,8 +6,8 @@ module.exports = {
     const year = new Date().getFullYear();
     return year;
   },
-  isEqual: (postId, uId) => {
-    if(postId === uId){
+  isEqual: (iD1, iD2) => {
+    if(iD1 === iD2){
       return true;
     } else {
       return false;

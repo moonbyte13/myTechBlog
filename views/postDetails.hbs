@@ -13,17 +13,15 @@
                   </div>
                 </p>
               </div>
-              {{#if loggedIn}}
-                {{#if (isEqual post.userId uId)}} <!-- A condition to check if the post author id is equal to the user id -->
-                  <div class='flex flex-row justify-end col-start-6 col-span-2'> <!-- Div for the buttons to edit and delete the post -->
-                    <div class='pr-2'>
-                      <a href='/editPost/{{post.id}}' class='text-sm underline hover:cursor-pointer' id='editPostFormBtn'>Edit</a> <!-- Button to edit the post -->
-                    </div>
-                    <div class=''>
-                      <a class='text-sm underline hover:cursor-pointer' data-post-id='{{post.id}}' id='deletePostBtn'>Delete</a> <!-- Button to delete the post -->
-                    </div>
+              {{#if (isEqual post.userId uId)}} <!-- A condition to check if the post author id is equal to the user id -->
+                <div class='flex flex-row justify-end col-start-6 col-span-2'> <!-- Div for the buttons to edit and delete the post -->
+                  <div class='pr-2'>
+                    <a href='/editPost/{{post.id}}' class='text-sm underline hover:cursor-pointer' id='editPostFormBtn'>Edit</a> <!-- Button to edit the post -->
                   </div>
-                {{/if}}
+                  <div class=''>
+                    <a class='text-sm underline hover:cursor-pointer' data-post-id='{{post.id}}' id='deletePostBtn'>Delete</a> <!-- Button to delete the post -->
+                  </div>
+                </div>
               {{/if}}
           </div>
       </div>
