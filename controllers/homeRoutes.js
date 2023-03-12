@@ -67,13 +67,11 @@ router.get('/details/:id', async (req, res) => {
     // Respond with the homepage template and the serialized data
     if(req.session.loggedIn) {
       // Set the session username to a variable
-      const userData = {
-        username: req.session.username,
-        id: req.session.userId
-      };
+      const username = req.session.username;
+      const uId = req.session.userId;
       // console.log(userData);
       // Respond with the homepage template and the serialized data
-      res.render('postDetails', { post, userData, loggedIn: true });
+      res.render('postDetails', { post, username, uId, loggedIn: true });
     } else {
       res.render('postDetails', { post });
     }
