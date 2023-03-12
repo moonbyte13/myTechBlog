@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // GET all posts for homepage
@@ -33,28 +33,24 @@ router.get('/', async (req, res) => {
 router.get('/details/:id', async (req, res) => {
   try {
     // Get all posts and JOIN with user data
-    // FIXME: jumping straight to line 63 without getting the post data
-    // NOTE: only started after adding the model: Comment to the include array
-    const postData = await Post.findOne({
-      where: { id: req.params.id },
-      attributes: ['id', 'title', 'content'],
+    // FIXME: if no comments on post, it will not render
+    const postData = await Post.findByPk(req.params.id, {
       include: [
         {
           model: User,
-          as: 'author',
           attributes: ['username']
         },
         {
           model: Comment,
           as: 'comments',
-          attributes: ['id', 'comment_text', 'user_id'],
+          attributes: ['id', 'commentText', 'userId', 'postId', 'createdAt'],
           include: [
             {
               model: User,
-              as: 'author',
               attributes: ['username']
             }
-          ]
+          ],
+          where: { postId: req.params.id }
         }
       ]
     });
@@ -71,7 +67,7 @@ router.get('/details/:id', async (req, res) => {
       // Respond with the homepage template and the serialized data
       res.render('postDetails', { post, username, uId, loggedIn: true });
     } else {
-      res.render('postDetails', { post, loggedIn: false });
+      res.render('postDetails', { post });
     }
   } catch (err) {
     res.status(500).json(err);

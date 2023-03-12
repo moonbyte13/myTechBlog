@@ -1,7 +1,10 @@
-{{#each goal.comments as |comment|}}
-  <div>
-    <p>{{comment.commentContent}}</p>
-    <p>By: {{comment.user.username}}</p>
-  </div>
-{{/each}}
+<div class='w-5/6 -translate-x-12 mt-6 mb-36 ml-2 cardContainer'>
+  {{#each post.comments as |comment|}}
+    <div class='card rounded-lg m-10 px-5 py-3 bg-green-300 text-zinc-700 grid grid-cols-12'>
+      <p class='col-span-8'>{{comment.commentText}}</p>
+      <p class='col-start-9 col-span-2 grid justify-self-end pr-5'>By: {{comment.user.username}}</p>
+      <div class='justify-self-start col-start-11 col-span-2'>{{ formatDateUTC comment.createdAt }}</div>
+    </div>
+  {{/each}}
+</div>
 

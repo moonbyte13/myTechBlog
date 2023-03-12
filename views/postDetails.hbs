@@ -1,9 +1,10 @@
 <div class='w-5/6 -translate-x-12 px-10 mt-14 mb-36 ml-2 cardContainer'> <!-- A container div with some styles applied -->
   <div class="flex border border-gray-900 text-zinc-700 bg-green-300 rounded-xl p-2 my-10 w-80 card w-full" id='card{{post.id}}'> <!-- A card div with styles applied, its id is based on the post id -->
       <div class="w-full py-3 px-5"> <!-- Div for padding inside the card -->
-          <div class="h-full grid grid-rows-4 grid-cols-7"> <!-- A grid to align elements in the card -->
-              <p class="font-bold text-xl h-fit col-span-5" style="font-family: 'Major Mono Display';">{{post.title}}</p> <!-- Title of the post with some styles applied -->
+          <div class="h-full grid grid-rows-4 grid-cols-8"> <!-- A grid to align elements in the card -->
+              <p class="font-bold text-xl h-fit col-span-4" style="font-family: 'Major Mono Display';">{{post.title}}</p> <!-- Title of the post with some styles applied -->
               <div class='justify-self-end row-1 col-start-6 col-span-2 pr-5'>By: {{post.user.username}}</div> <!-- Username of the author of the post aligned to the right -->
+              <div class='justify-self-start col-start-8 col-span-1'>{{ formatDateUTC post.createdAt }}</div>
               <div class='row-start-2 row-span-3 col-span-7 h-fit w-fit'> <!-- Div for the content of the post -->
                 <p class=''>
                   {{post.postContent}} <!-- The content of the post -->
@@ -12,19 +13,22 @@
                   </div>
                 </p>
               </div>
-              {{#if (isEqual post.user.id uId)}} <!-- A condition to check if the post author id is equal to the user id -->
-                <div class='flex flex-row justify-end col-start-6 col-span-2'> <!-- Div for the buttons to edit and delete the post -->
-                  <div class='pr-2'>
-                    <a href='/editPost/{{post.id}}' class='text-sm underline hover:cursor-pointer' id='editPostFormBtn'>Edit</a> <!-- Button to edit the post -->
+              {{!-- FIXME: Not working as intended --}}
+              {{#if loggedIn}}
+                {{#if (isEqual post.userId uId)}} <!-- A condition to check if the post author id is equal to the user id -->
+                  <div class='flex flex-row justify-end col-start-6 col-span-2'> <!-- Div for the buttons to edit and delete the post -->
+                    <div class='pr-2'>
+                      <a href='/editPost/{{post.id}}' class='text-sm underline hover:cursor-pointer' id='editPostFormBtn'>Edit</a> <!-- Button to edit the post -->
+                    </div>
+                    <div class=''>
+                      <a class='text-sm underline hover:cursor-pointer' data-post-id='{{post.id}}' id='deletePostBtn'>Delete</a> <!-- Button to delete the post -->
+                    </div>
                   </div>
-                  <div class=''>
-                    <a class='text-sm underline hover:cursor-pointer' data-post-id='{{post.id}}' id='deletePostBtn'>Delete</a> <!-- Button to delete the post -->
-                  </div>
-                </div>
+                {{/if}}
               {{/if}}
           </div>
       </div>
   </div>
 </div>
-{{!-- {{> comments}} --}}
+{{> comments}}
 <script src="/js/deletePost.js"></script> <!-- Script to handle the delete post button -->

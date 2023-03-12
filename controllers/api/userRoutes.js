@@ -45,9 +45,8 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       return res.status(400).json({ message: 'Incorrect email or password!' });
     }
-
     // Map user data to plain objects
-    const uData = userData.map((user) => user.get({ plain: true }));
+    const uData = userData.get({ plain: true });
     // Delete the password from the user object
     delete uData.password;
     // Set session variables

@@ -8,7 +8,7 @@ const loginFormHandler = async (event) => {
   if (email && password) {
     const response = await fetch('/api/users/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email: email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
     // If the response is ok, redirect to the dashboard and alert the user that they have logged in
