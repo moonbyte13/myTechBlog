@@ -6,9 +6,9 @@ router.post('/comment', async (req, res) => {
   try {
     console.log(req.body);
     const dbCommentData = await Comment.create({
-      commentText: body.commentText,
+      commentText: req.body.commentText,
       userId: req.session.userId,
-      postId: body.postId
+      postId: req.body.postId
     });
     res.json(dbCommentData);
   } catch (err) {
